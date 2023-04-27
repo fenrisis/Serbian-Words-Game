@@ -1,0 +1,7 @@
+random
+The buid in Python Random Module
+-Python has a built-in module that you can use to make random numbers.
+
+pytest
+The pytest framework makes it easy to write small, readable tests, and can scale to support complex functional testing for applications and libraries.
+-pip install -U pytest
