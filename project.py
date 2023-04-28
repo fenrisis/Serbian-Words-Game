@@ -5,9 +5,11 @@ print("Welcome to the Serbian Language Learning Game!")
 
 # Start the Serbian language learning game
 def start_learning(difficulty, get_input=input) :
+   
     # Initialize score and number of questions
     score = 0
     num_questions = 0
+    
     # Determine the number of options based on the difficulty level
     if difficulty == '1' :
         num_options = 2
@@ -22,21 +24,25 @@ def start_learning(difficulty, get_input=input) :
     while True :
         if num_questions == 10 :
             break
+        
         # Choose a random word from the dictionary and get its translation
         word = random.choice(list(dictionary.keys()))
         translation = dictionary[word]
+        
         # Generate a list of options, including the correct answer
         options = [translation]
         while len(options) < num_options :
             option = random.choice(list(dictionary.values()))
             if option not in options :
                 options.append(option)
+        
         # Shuffle the options and ask the user to select one
         random.shuffle(options)
         print(f"What is the translation of '{word}'?")
         for i, option in enumerate(options) :
             print(f"{i + 1}. {option}")
         guess = get_input("Enter the number of your answer: ")
+        
         # Check if the user's input is valid and update the score and number of questions
         if guess.isdigit() and int(guess) in range(1, num_options + 1) :
             guess_index = int(guess) - 1
@@ -66,14 +72,11 @@ def get_translation(word) :
     return dictionary[word]
 
 # Get a list of options, including the correct answer, for a given translation
-def get_options(translation, num_options) :
-    options = [translation]
-    while len(options) < num_options :
-        option = random.choice(list(dictionary.values()))
-        if option not in options :
-            options.append(option)
+def get_options(translation, num_options):
+    options = [translation] + [random.choice(list(dictionary.values())) for _ in range(num_options-1)]
     random.shuffle(options)
     return options
+
 
 # Main function that runs the game
 def main() :
